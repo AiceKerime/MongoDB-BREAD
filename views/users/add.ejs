@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+
+    <div class="container">
+        <h2>Add data</h2>
+
+        <form action="/add" method="post">
+            <div class="py-2">
+                <label for="string" class="form-label">String</label>
+                <input name="string" type="text" id="string" class="form-control" required>
+            </div>
+
+            <div class="py-2">
+                <label for="number" class="form-label">Integer</label>
+                <input name="integer" type="number" id="number" class="form-control" required>
+            </div>
+
+            <div class="py-2">
+                <label for="float" class="form-label">Float</label>
+                <input name="float" step="0.005" type="number" step="any" id="float" class="form-control" required>
+            </div>
+
+            <div class="py-2">
+                <label for="date" class="form-label">Date</label>
+                <input name="date" type="date" id="date" class="form-control">
+            </div>
+
+            <div class="py-2">
+                <label for="boolean" class="form-label">
+                    Boolean
+                </label>
+                <div class="space-8">
+                    <select name="boolean" class="form-control">
+                        <option value="" selected disabled>-- Choose Boolean --</option>
+                        <option value=true>True</option>
+                        <option value=false>False</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+
+            <div>
+                <button type="submit" class="btn btn-primary" id="SaveButton">Save</button>
+                <a href="/" class="btn btn-danger" id="BackButton">Back</a>
+            </div>
+        </form>
+    </div>
+
+    <%- include('../partials/footer') %>

@@ -1,0 +1,91 @@
+<%- include('../partials/header') %>
+
+    <div class="container">
+        <h2><strong>BREAD (Browse, Read, Edit, Add, Delete)</strong></h2>
+        <%- include('../users/search') %>
+
+            <table id="table" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>ID</th>
+                        <th>String</th>
+                        <th>Integer</th>
+                        <th>Float</th>
+                        <th>Date</th>
+                        <th>Boolean</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% data.forEach((item, index)=> { %>
+                        <tr>
+                            <td>
+                                <%= index + 1 %>
+                            </td>
+                            <td>
+                                <%= item.id %>
+                            </td>
+                            <td>
+                                <%= item.string %>
+                            </td>
+                            <td>
+                                <%= item.integer %>
+                            </td>
+                            <td>
+                                <%= item.float %>
+                            </td>
+                            <td>
+                                <%= item.date ? moment(item.date).format('DD MMMM YYYY') : 'kosong' %>
+                            </td>
+                            <td>
+                                <%= item.boolean %>
+                            </td>
+                            <td>
+                                <a href="/edit/<%= item.id %>" class="btn btn-success">Edit</a>
+                                <a href="/delete/<%= item.id %>"
+                                    onclick="return confirm('Are you sure you want to delete this data?')"
+                                    class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+            <br>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a class="btn btn-primary" href="/add">Add</a>
+                    <a href="/" class="btn btn-danger" id="BackButton">Back</a>
+                </div>
+
+                <div class="" id="pagination">
+                    <ul class="pagination">
+
+                        <li>
+                            <%if (page !=1 ) { %>
+                                <a href="<%=url.replace(`page=${page}`,`page=${parseInt(page)-1}`)%>">&laquo;</a>
+                                <% } %>
+                        </li>
+
+                        <% for (let i=1; i <=pages; i++) { %>
+                            <li class="page-item <%= i == page ? 'active' : '' %>" aria-current="page">
+                                <a href="<%=url.replace(`page=${page}`,`page=${i}`) %>">
+                                    <%= i %>
+                                </a>
+                            </li>
+                            <% } %>
+
+
+                                <li>
+                                    <%if (page <=pages && page !=pages) { %>
+                                        <a
+                                            href="<%=url.replace(`page=${page}`,`page=${parseInt(page)+1}`)%>">&raquo;</a>
+                                        <% } %>
+                                </li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+
+    <%- include('../partials/footer') %>
