@@ -1,0 +1,27 @@
+<div class="" id="pagination">
+                <ul class="pagination">
+
+                    <li>
+                        <%if (page !=1 ) { %>
+                            <a href="<%=url.replace(`page=${page}`,`page=${parseInt(page)-1}`)%>">&laquo;</a>
+                            <% } %>
+                    </li>
+
+                    <% for (let i=1; i <=pages; i++) { %>
+                        <li class="page-item <%= i == page ? 'active' : '' %>" aria-current="page">
+                            <a href="<%=url.replace(`page=${page}`,`page=${i}`) %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                        <% } %>
+
+
+                            <li>
+                                <%if (page <=pages && page !=pages) { %>
+                                    <a href="<%=url.replace(`page=${page}`,`page=${parseInt(page)+1}`)%>">&raquo;</a>
+                                    <% } %>
+                            </li>
+                </ul>
+            </div>
+
+            ? moment(item.date).format('DD MMMM YYYY') : 'kosong' 

@@ -3,22 +3,12 @@
 <form action="" method="get">
     <input type="hidden" name="page" value="1">
     <div>
-        <div class="py-2 align-items-center">
-            <input type="checkbox" name="idCheck" aria-label="Checkbox for following text input" <%=query.idCheck=='on'
-                ? 'checked' : '' %>>
-            <label class="col-sm-2 form-label">ID</label>
-            <div class="space-8">
-                <input id="id" class="form-control" type="number" name="id" placeholder="Id" value="<%= query.id %>">
-            </div>
-        </div>
-    </div>
-    <br>
-
-    <div>
         <div class=" py-2 align-items-center">
             <input type="checkbox" name="stringCheck" aria-label="Checkbox for following text input"
                 <%=query.stringCheck=='on' ? 'checked' : '' %>>
+
             <label class="col-sm-2 form-label">String</label>
+
             <div class="space-8">
                 <input class="form-control" type="text" name="string" placeholder="String" value="<%= query.string %>">
             </div>
@@ -30,7 +20,9 @@
         <div class=" py-2">
             <input type="checkbox" name="integerCheck" aria-label="Checkbox for following text input"
                 <%=query.integerCheck=='on' ? 'checked' : '' %>>
+
             <label class="col-sm-2 form-label">Integer</label>
+
             <div>
                 <input class="form-control" type="number" name="integer" placeholder="Integer"
                     value="<%= query.integer %>">
@@ -43,7 +35,9 @@
         <div class="py-2 align-items-center">
             <input type="checkbox" name="floatCheck" aria-label="Checkbox for following text input"
                 <%=query.floatCheck=='on' ? 'checked' : '' %>>
+
             <label class="col-sm-2 form-label">Float</label>
+
             <div class="space-8">
                 <input class="form-control" step="0.005" type="number" name="float" placeholder="Float"
                     value="<%= query.float %>">
@@ -54,11 +48,10 @@
 
     <div>
         <div class="py-2">
-            <div>
-                <input type="checkbox" name="dateCheck" label="Checkbox for following text input"
-                    <%=query.dateCheck=='on' ? 'checked' : '' %>>
-                <label class="me-5">Date</label>
-            </div>
+            <input type="checkbox" name="dateCheck" label="Checkbox for following text input" <%=query.dateCheck=='on'
+                ? 'checked' : '' %>>
+
+            <label class="me-5">Date</label>
 
             <div>
                 <input class="form-control" type="date" name="startDate" value="<%= query.startDate %>">
@@ -72,7 +65,9 @@
     <div class="py-2">
         <input type="checkbox" name="booleanCheck" aria-label="Checkbox for following text input"
             <%=query.booleanCheck=='on' ? 'checked' : '' %>>
+
         <label class="">Boolean</label>
+
         <div class="py-2">
             <select class="form-control" name="boolean">
                 <option value="" selected disabled>-- Choose Boolean --</option>

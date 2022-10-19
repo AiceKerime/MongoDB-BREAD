@@ -2,7 +2,8 @@
 
     <div class="container">
         <h2><strong>BREAD (Browse, Read, Edit, Add, Delete)</strong></h2>
-        <%- include('../users/search') %>
+
+        <%- include('search') %>
 
             <table id="table" class="table table-striped table-hover">
                 <thead>
@@ -39,8 +40,8 @@
                                 <%= item.boolean %>
                             </td>
                             <td>
-                                <a href="/edit/<%= item.id %>" class="btn btn-success">Edit</a>
-                                <a href="/delete/<%= item.id %>"
+                                <a href="/edit/<%= item._id %>" class="btn btn-success">Edit</a>
+                                <a href="/delete/<%= item._id %>"
                                     onclick="return confirm('Are you sure you want to delete this data?')"
                                     class="btn btn-danger">Delete</a>
                             </td>
@@ -53,33 +54,6 @@
                 <div>
                     <a class="btn btn-primary" href="/add">Add</a>
                     <a href="/" class="btn btn-danger" id="BackButton">Back</a>
-                </div>
-
-                <div class="" id="pagination">
-                    <ul class="pagination">
-
-                        <li>
-                            <%if (page !=1 ) { %>
-                                <a href="<%=url.replace(`page=${page}`,`page=${parseInt(page)-1}`)%>">&laquo;</a>
-                                <% } %>
-                        </li>
-
-                        <% for (let i=1; i <=pages; i++) { %>
-                            <li class="page-item <%= i == page ? 'active' : '' %>" aria-current="page">
-                                <a href="<%=url.replace(`page=${page}`,`page=${i}`) %>">
-                                    <%= i %>
-                                </a>
-                            </li>
-                            <% } %>
-
-
-                                <li>
-                                    <%if (page <=pages && page !=pages) { %>
-                                        <a
-                                            href="<%=url.replace(`page=${page}`,`page=${parseInt(page)+1}`)%>">&raquo;</a>
-                                        <% } %>
-                                </li>
-                    </ul>
                 </div>
             </div>
     </div>
