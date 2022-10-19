@@ -66,6 +66,11 @@ module.exports = (db) => {
     }
   });
 
+
+  router.get('/add', (req, res) => {
+    res.render('users/add')
+  })
+
   router.get('/delete/:id', (req, res) => {
     db.collection("dataBread").deleteOne({ "_id": ObjectId(`${req.params.id}`) }, (err) => {
       if (err) {
@@ -88,7 +93,7 @@ module.exports = (db) => {
 
   // ROUTER POST
   router.post('/edit/:id', (req, res) => {
-    let { string, integer, float, date, boolean } = req.body
+    const { string, integer, float, date, boolean } = req.body
     let Obj = {
       string: string,
       integer: Number(integer),
@@ -97,6 +102,25 @@ module.exports = (db) => {
       boolean: JSON.parse(boolean)
     }
     db.collection("dataBread").updateOne({ "_id": ObjectId(`${req.params.id}`) }, { $set: Obj }, (err) => {
+      if (err) {
+        console.log(err)
+        res.send(err)
+      }
+      res.redirect('/')
+    })
+  })
+
+  router.post('/add', (res, req) => {
+    const { string, integer, float, date, boolean } = req.body
+    let Obj = {
+      string: string,
+      integer: Number(integer),
+      float: parseFloat(float),
+      date: date,
+      boolean: JSON.parse(boolean)
+    }
+
+    db.collection("dataBread").insertOne(Obj, (err) => {
       if (err) {
         console.log(err)
         res.send(err)
