@@ -33,11 +33,11 @@ module.exports = (db) => {
       if (req.query.dateCheck == 'on') {
         if (req.query.startDate != '' && req.query.endDate != '') {
           wheres['date'] = { $gte: new Date(`${req.query.startDate}`), $lte: new Date(`${req.query.endDate}`) }
-        }
-        else if (req.query.startDate) {
+
+        } else if (req.query.startDate) {
           wheres['date'] = { $gte: new Date(`${req.query.startDate}`) }
-        }
-        else if (req.query.endDate) {
+
+        } else if (req.query.endDate) {
           wheres['date'] = { $lte: new Date(`${req.query.endDate}`) }
         }
       }
@@ -111,13 +111,12 @@ module.exports = (db) => {
   })
 
   router.post('/add', (res, req) => {
-    const { string, integer, float, date, boolean } = req.body
     let Obj = {
-      string: string,
-      integer: Number(integer),
-      float: parseFloat(float),
-      date: date,
-      boolean: JSON.parse(boolean)
+      string: `${req.body.string}`,
+      integer: Number(req.body.integer),
+      float: parseFloat(req.body.float),
+      date: req.body.date,
+      boolean: JSON.parse(req.bodyboolean)
     }
 
     db.collection("dataBread").insertOne(Obj, (err) => {
@@ -125,9 +124,9 @@ module.exports = (db) => {
         console.log(err)
         res.send(err)
       }
-      res.redirect('/')
     })
+    res.redirect('/')
   })
 
   return router;
-}  
+};
