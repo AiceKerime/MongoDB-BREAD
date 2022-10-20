@@ -53,10 +53,11 @@ module.exports = (db) => {
       const pages = Math.ceil(total / limit)
 
       const data = await db.collection("dataBread").find(wheres).skip(offset).limit(limit).collation({ 'locale': 'en' }).sort(sortMongo).toArray()
+
       res.render('users/list', { data, pages, page, filter, query: req.query, sortBy, sortMode, moment, url })
     } catch (error) {
-      res.send(error)
       console.log(error)
+      res.send(error)
     }
   });
 
