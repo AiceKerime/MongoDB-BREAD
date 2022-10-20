@@ -1,11 +1,11 @@
-const { ObjectID, ObjectId } = require('bson');
+const { ObjectId } = require('bson');
 const express = require('express');
 const router = express.Router();
 const moment = require('moment');
 
 module.exports = (db) => {
 
-  // ROUTER GET
+  // ROUTER GET DATA (VIEW)
   router.get('/', async (req, res) => {
     try {
       const url = req.url == '/' ? '/?page=1' : req.url;
@@ -43,90 +43,96 @@ module.exports = (db) => {
       }
 
       if (req.query.boolean && req.query.booleanCheck == 'on') {
-        wheres['boolean'] = req.query.boolean
+        wheres['boolean'] = JSON.parse(req.query.boolean)
       }
 
 
-      db.collection("dataBread").find(wheres).toArray(function (err, result) {
-        if (err) {
-          console.error(err);
-        }
-        var total = result.length;
-        const pages = Math.ceil(total / limit)
-        db.collection("dataBread").find(wheres).skip(offset).limit(limit).collation({ 'locale': 'en' }).sort(sortMongo).toArray((err, data) => {
-          if (err) {
-            console.error(err)
-          }
-          res.render('users/list', { data, pages, page, filter, query: req.query, sortBy, sortMode, moment, url })
-        })
-      })
+      const result = await db.collection("dataBread").find(wheres).toArray()
+
+      var total = result.length;
+      const pages = Math.ceil(total / limit)
+
+      const data = await db.collection("dataBread").find(wheres).skip(offset).limit(limit).collation({ 'locale': 'en' }).sort(sortMongo).toArray()
+      res.render('users/list', { data, pages, page, filter, query: req.query, sortBy, sortMode, moment, url })
     } catch (error) {
       res.send(error)
       console.log(error)
     }
   });
 
-
+  // ROUTER ADD
   router.get('/add', (req, res) => {
     res.render('users/add')
   })
 
-  router.get('/delete/:id', (req, res) => {
-    db.collection("dataBread").deleteOne({ "_id": ObjectId(`${req.params.id}`) }, (err) => {
-      if (err) {
-        res.send(err)
-        console.log(err)
-      }
-    })
-    res.redirect('/')
-  });
+  router.post('/add', async (req, res) => {
+    try {
+      const { string, integer, float, date, boolean } = req.body
 
-  router.get('/edit/:id', (req, res) => {
-    db.collection("dataBread").find({ "_id": ObjectId(`${req.params.id}`) }).toArray((err, data) => {
-      if (err) {
-        console.log(err)
-        res.send(err)
+      let Obj = {
+        string: string,
+        integer: Number(integer),
+        float: parseFloat(float),
+        date: date,
+        boolean: JSON.parse(boolean)
       }
-      res.render('users/edit', { item: data[0], moment })
-    })
-  })
 
-  // ROUTER POST
-  router.post('/edit/:id', (req, res) => {
-    const { string, integer, float, date, boolean } = req.body
-    let Obj = {
-      string: string,
-      integer: Number(integer),
-      float: parseFloat(float),
-      date: date,
-      boolean: JSON.parse(boolean)
-    }
-    db.collection("dataBread").updateOne({ "_id": ObjectId(`${req.params.id}`) }, { $set: Obj }, (err) => {
-      if (err) {
-        console.log(err)
-        res.send(err)
-      }
+      const addData = await db.collection("dataBread").insertOne(Obj)
+
       res.redirect('/')
-    })
+    } catch (err) {
+      console.log(err)
+      res.send(err)
+    }
   })
 
-  router.post('/add', (res, req) => {
-    let Obj = {
-      string: `${req.body.string}`,
-      integer: Number(req.body.integer),
-      float: parseFloat(req.body.float),
-      date: req.body.date,
-      boolean: JSON.parse(req.bodyboolean)
+  // ROUTER EDIT
+  router.get('/edit/:id', async (req, res) => {
+    try {
+      const result = await db.collection("dataBread").findOne({ "_id": ObjectId(`${req.params.id}`) })
+
+      res.render('users/edit', { item: result, moment })
+
+    } catch (err) {
+      console.log(err)
+      res.send(err)
+    }
+  })
+
+  router.post('/edit/:id', async (req, res) => {
+    try {
+      const { string, integer, float, date, boolean } = req.body
+
+      let Obj = {
+        string: string,
+        integer: Number(integer),
+        float: parseFloat(float),
+        date: date,
+        boolean: JSON.parse(boolean)
+      }
+
+      const updateData = await db.collection("dataBread").updateOne({ "_id": ObjectId(`${req.params.id}`) }, { $set: Obj })
+
+      res.redirect('/')
+
+    } catch (err) {
+      console.log(err)
+      res.send(err)
+    }
+  })
+
+  // ROUTER DELETE
+  router.get('/delete/:id', async (req, res) => {
+    try {
+      const deleteData = await db.collection("dataBread").deleteOne({ "_id": ObjectId(`${req.params.id}`) })
+
+      res.redirect('/')
+    } catch (err) {
+      console.log(err)
+      res.send(err)
     }
 
-    db.collection("dataBread").insertOne(Obj, (err) => {
-      if (err) {
-        console.log(err)
-        res.send(err)
-      }
-    })
-    res.redirect('/')
-  })
+  });
 
   return router;
 };

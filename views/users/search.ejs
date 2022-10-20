@@ -71,17 +71,17 @@
         <div class="py-2">
             <select class="form-control" name="boolean">
                 <option value="" selected disabled>-- Choose Boolean --</option>
-                <option value="true" <%=query.boolean==1 ? 'selected' : '' %> name="boolean">True</option>
-                <option value="false" <%=query.boolean==0 ? 'selected' : '' %> name="boolean">False</option>
+                <option value=true <%=query.boolean==1 ? 'selected' : '' %> name="boolean">True</option>
+                <option value=false <%=query.boolean==0 ? 'selected' : '' %> name="boolean">False</option>
             </select>
         </div>
     </div>
 
     <div class="button">
-        <button type="submit" id=" search-button" class="btn btn-primary"><i
-                class="fa-solid fa-magnifying-glass"></i></button>
+        <button type="submit" id=" search-button" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
+            Search </button>
 
         <a href="/" type="reset" class="btn btn-danger ml-1" id="reset-button"><i
-                class="fa-solid fa-clock-rotate-left"></i></a>
+                class="fa-solid fa-clock-rotate-left"></i> Reset</a>
     </div>
 </form>

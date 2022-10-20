@@ -57,3 +57,11 @@ a {
 .ml-1 {
   margin-left: 0.2rem;
 }
+
+.card-table {
+  background: #e5e7eb;
+  padding: 2.5rem 1rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  border: 5px solid #64748b;
+}
