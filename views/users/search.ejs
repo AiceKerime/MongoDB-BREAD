@@ -48,15 +48,14 @@
 
     <div>
         <div class="py-2">
-            <input type="checkbox" name="dateCheck" label="Checkbox for following text input" <%=query.dateCheck=='on'
-                ? 'checked' : '' %>>
+            <input type="checkbox" id="date" name="dateCheck" label="Checkbox for following text input"
+                <%=query.dateCheck=='on' ? 'checked' : '' %>>
 
-            <label class="me-5">Date</label>
-
+            <label class="me-5" for="date">Date</label>
             <div>
-                <input class="form-control" type="date" name="startDate" value="<%= query.startDate %>">
+                <input class="form-control" type="date" name="startDate" value="<%=query.startDate %>">
                 <p>to</p>
-                <input class="form-control" type="date" name="endDate" value="<%= query.endDate %>">
+                <input class="form-control" type="date" name="endDate" value="<%=query.endDate %>">
             </div>
         </div>
     </div>

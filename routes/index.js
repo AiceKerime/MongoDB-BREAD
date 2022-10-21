@@ -36,15 +36,15 @@ module.exports = (db) => {
         wheres['float'] = JSON.parse(req.query.float)
       }
 
-      if (req.query.dateCheck == 'on') {
-        if (req.query.startDate != '' && req.query.endDate != '') {
-          wheres['date'] = { $gte: new Date(`${req.query.startDate}`), $lte: new Date(`${req.query.endDate}`) }
-
+      if (req.query.dateCheck == "on") {
+        if (req.query.startDate != "" && req.query.endDate != "") {
+          wheres["date"] = {
+            $gte: new Date(`${req.query.startDate}`), $lte: new Date(`${req.query.endDate}`),
+          }
         } else if (req.query.startDate) {
-          wheres['date'] = { $gte: new Date(`${req.query.startDate}`) }
-
+          wheres["date"] = { $gte: new Date(`${req.query.startDate}`) };
         } else if (req.query.endDate) {
-          wheres['date'] = { $lte: new Date(`${req.query.endDate}`) }
+          wheres["date"] = { $lte: new Date(`${req.query.endDate}`) };
         }
       }
 
