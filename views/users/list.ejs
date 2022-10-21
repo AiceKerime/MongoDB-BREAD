@@ -20,20 +20,23 @@
 
                     <th><a
                             href="<%= url.replace(`sortBy=${sortBy}`, `sortBy=integer`).replace(`sortMode=${sortMode}`, `sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`) %>"><i
-                                class="fa-solid fa-<%= sortBy == 'string' ? sortMode == 'asc' ?  'sort-up' : 'sort-down' : 'sort' %>"></i>
+                                class="fa-solid fa-<%= sortBy == 'integer' ? sortMode == 'asc' ?  'sort-up' : 'sort-down' : 'sort' %>"></i>
                             Integer</th>
 
                     <th><a
                             href="<%= url.replace(`sortBy=${sortBy}`, `sortBy=float`).replace(`sortMode=${sortMode}`, `sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`) %>"><i
-                                class="fa-solid fa-sort"></i> Float</a></th>
+                                class="fa-solid fa-<%= sortBy == 'float' ? sortMode == 'asc' ?  'sort-up' : 'sort-down' : 'sort' %>"></i>
+                            Float</a></th>
 
                     <th><a
                             href="<%= url.replace(`sortBy=${sortBy}`, `sortBy=date`).replace(`sortMode=${sortMode}`, `sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`) %>"><i
-                                class="fa-solid fa-sort"></i> Date</a></th>
+                                class="fa-solid fa-<%= sortBy == 'date' ? sortMode == 'asc' ?  'sort-up' : 'sort-down' : 'sort' %>"></i>
+                            Date</a></th>
 
                     <th><a
                             href="<%= url.replace(`sortBy=${sortBy}`, `sortBy=boolean`).replace(`sortMode=${sortMode}`, `sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`) %>"><i
-                                class="fa-solid fa-sort"></i> Boolean</a></th>
+                                class="fa-solid fa-<%= sortBy == 'boolean' ? sortMode == 'asc' ?  'sort-up' : 'sort-down' : 'sort' %>"></i>
+                            Boolean</a></th>
 
                     <th>Actions</th>
                 </tr>
