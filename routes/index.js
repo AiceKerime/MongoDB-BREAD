@@ -15,10 +15,10 @@ module.exports = (db) => {
       const wheres = {}
       const filter = `&idCheck=${req.query.idCheck}&id=${req.query.id}&stringCheck=${req.query.stringCheck}&string=${req.query.string}&integerCheck=${req.query.integerCheck}&integer=${req.query.integer}&floatCheck=${req.query.floatCheck}&float=${req.query.float}&dateCheck=${req.query.dateCheck}&startDate=${req.query.startDate}&endDate=${req.query.endDate}&booleanCheck=${req.query.booleanCheck}&boolean=${req.query.boolean}`
 
-      var sortBy = req.query.sortBy || "string"
-      var sortMode = req.query.sortMode || "asc"
+      let sortBy = req.query.sortBy || "string"
+      let sortMode = req.query.sortMode || "desc"
 
-      var sortMongo = `{"${sortBy}" : ${sortMode}}`;
+      let sortMongo = `{"${sortBy}" : ${sortMode}}`;
 
       if (req.query.string && req.query.stringCheck == 'on') {
         wheres["string"] = new RegExp(`${req.query.string}`, 'i')
