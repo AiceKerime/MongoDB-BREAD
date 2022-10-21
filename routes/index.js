@@ -18,7 +18,7 @@ module.exports = (db) => {
       // SORTING
       const sortMongo = {}
 
-      let sortBy = req.query.sortBy || "string"
+      let sortBy = req.query.sortBy || "_id"
       let sortMode = req.query.sortMode || "asc"
 
       sortMongo[sortBy] = sortMode == "asc" ? 1 : -1;
