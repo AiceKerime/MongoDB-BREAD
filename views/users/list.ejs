@@ -12,13 +12,23 @@
                 <tr class="table-dark">
                     <th>No.</th>
                     <th>
-                        <a href="#"><i class="fa-solid fa-sort"></i>String</a>
+                        <a href="<%=`/?page=${page}${filter}`%><%= sortBy == 'integer' && sortMode ==1 ? " "&sortBy=integer&sortMode=-1"
+                            : "&sortBy=integer&sortMode=1" %>"><i class="fa-solid fa-sort"><i
+                                    class="fa-solid fa-sort"></i> String</a>
                     </th>
-                    <th><a href=""><i class="fa-solid fa-sort"></i> Integer</th>
-                    <th><a href=""><i class="fa-solid fa-sort"></i> Float</a></th>
-                    <th><a href=""><i class="fa-solid fa-sort"></i> Date</a></th>
-                    <th><a href=""><i class="fa-solid fa-sort"></i> Boolean</a></th>
-                    <th><a href=""><i class="fa-solid fa-sort"></i> Actions</a></th>
+                    <th><a href="<%=`/?page=${page}${filter}`%><%= sortBy == 'integer' && sortMode ==1 ? " "&sortBy=integer&sortMode=-1"
+                            : "&sortBy=integer&sortMode=1" %>"><i class="fa-solid fa-sort"></i> Integer</th>
+
+                    <th><a href="<%=`/?page=${page}${filter}`%><%= sortBy == 'float' && sortMode ==1 ? " "&sortBy=float&sortMode=-1"
+                            : "&sortBy=float&sortMode=1" %>"><i class="fa-solid fa-sort"></i> Float</a></th>
+
+                    <th><a href="<%=`/?page=${page}${filter}`%><%= sortBy == 'date' && sortMode ==1 ? " "&sortBy=date&sortMode=-1"
+                            : "&sortBy=date&sortMode=1" %>"><i class="fa-solid fa-sort"></i> Date</a></th>
+
+                    <th><a href="<%=`/?page=${page}${filter}`%><%= sortBy == 'boolean' && sortMode ==1 ? " "&sortBy=boolean&sortMode=-1"
+                            : "&sortBy=boolean&sortMode=1" %>"><i class="fa-solid fa-sort"></i> Boolean</a></th>
+
+                    <th>Actions</th>
                 </tr>
             </thead>
 
