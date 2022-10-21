@@ -14,12 +14,14 @@
                     <th>
                         <a
                             href="<%= url.replace(`sortBy=${sortBy}`, `sortBy=string`).replace(`sortMode=${sortMode}`, `sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`) %>"><i
-                                class="fa-solid fa-sort"></i>String</a>
+                                class="fa-solid fa-<%= sortBy == 'string' ? sortMode == 'asc' ?  'sort-up' : 'sort-down' : 'sort' %>"></i>
+                            String</a>
                     </th>
 
                     <th><a
                             href="<%= url.replace(`sortBy=${sortBy}`, `sortBy=integer`).replace(`sortMode=${sortMode}`, `sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`) %>"><i
-                                class="fa-solid fa-sort"></i> Integer</th>
+                                class="fa-solid fa-<%= sortBy == 'string' ? sortMode == 'asc' ?  'sort-up' : 'sort-down' : 'sort' %>"></i>
+                            Integer</th>
 
                     <th><a
                             href="<%= url.replace(`sortBy=${sortBy}`, `sortBy=float`).replace(`sortMode=${sortMode}`, `sortMode=${sortMode == 'asc' ? 'desc' : 'asc'}`) %>"><i

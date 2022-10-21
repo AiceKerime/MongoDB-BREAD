@@ -8,18 +8,22 @@ module.exports = (db) => {
   // ROUTER GET DATA (VIEW)
   router.get('/', async (req, res) => {
     try {
-      const url = req.url == '/' ? '/?page=1&sortBy=string&sortMode=asc' : req.url;
+      const url = req.url == '/' ? '/?page=1&sortBy=string&sortMode=1' : req.url;
       const page = req.query.page || 1;
       const limit = 3;
       const offset = (page - 1) * limit;
       const wheres = {}
       const filter = `&idCheck=${req.query.idCheck}&id=${req.query.id}&stringCheck=${req.query.stringCheck}&string=${req.query.string}&integerCheck=${req.query.integerCheck}&integer=${req.query.integer}&floatCheck=${req.query.floatCheck}&float=${req.query.float}&dateCheck=${req.query.dateCheck}&startDate=${req.query.startDate}&endDate=${req.query.endDate}&booleanCheck=${req.query.booleanCheck}&boolean=${req.query.boolean}`
 
+      // SORTING
+      const sortMongo = {}
+
       let sortBy = req.query.sortBy || "string"
-      let sortMode = req.query.sortMode || "desc"
+      let sortMode = req.query.sortMode || "asc"
 
-      let sortMongo = `{"${sortBy}" : ${sortMode}}`;
+      sortMongo[sortBy] = sortMode == "asc" ? 1 : -1;
 
+      // FILTERS
       if (req.query.string && req.query.stringCheck == 'on') {
         wheres["string"] = new RegExp(`${req.query.string}`, 'i')
       }
@@ -54,7 +58,7 @@ module.exports = (db) => {
       var total = result.length;
       const pages = Math.ceil(total / limit)
 
-      const data = await db.collection("dataBread").find(wheres).skip(offset).limit(limit).collation({ 'locale': 'en' }).sort(sortMongo).toArray()
+      const data = await db.collection("dataBread").find(wheres).skip(offset).limit(limit).sort(sortMongo).toArray()
 
       res.render('users/list', { data, pages, page, filter, query: req.query, sortBy, sortMode, moment, url })
     } catch (error) {

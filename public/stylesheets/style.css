@@ -65,3 +65,8 @@ a {
   border-radius: 1rem;
   border: 5px solid #64748b;
 }
+
+.table-dark a {
+  text-decoration: none;
+  color: white;
+}
